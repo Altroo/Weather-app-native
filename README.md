@@ -11,10 +11,6 @@ A simple mobile weather application built with React Native and Expo that fetche
 - User-friendly error messages on API failure
 - Light and dark mode support
 
-## Screenshots
-
-(Add screenshots of your app here)
-
 ## Setup Instructions
 
 ### Prerequisites
