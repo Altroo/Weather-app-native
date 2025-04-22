@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View, Image } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
-import { WeatherData } from '@/services/weatherApi';
+import { WeatherData } from '@/types/weather';
 import { useThemeColor } from '@/hooks/useThemeColor';
 
 interface WeatherCardProps {

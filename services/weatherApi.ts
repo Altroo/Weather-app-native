@@ -5,22 +5,8 @@
 // Import environment variables
 import { API_KEY, BASE_URL } from '@env';
 
-// Types for weather data
-export interface WeatherData {
-  city: string;
-  country: string;
-  temperature: number;
-  feelsLike: number;
-  description: string;
-  icon: string;
-  humidity: number;
-  windSpeed: number;
-  date: number;
-}
-
-export interface ForecastData {
-  list: WeatherData[];
-}
+// Import types
+import { WeatherData, ForecastData } from '../types/weather';
 
 /**
  * Fetch current weather data for a city

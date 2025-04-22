@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useReducer, ReactNode } from 'react';
-import { WeatherData, ForecastData, fetchWeather, fetchForecast } from '@/services/weatherApi';
+import { WeatherData, ForecastData } from '@/types/weather';
+import { fetchWeather, fetchForecast } from '@/services/weatherApi';
 
 // Define the state shape
 interface WeatherState {
@@ -81,13 +82,13 @@ export const WeatherProvider: React.FC<WeatherProviderProps> = ({ children }) =>
   const fetchWeatherData = async (city: string) => {
     try {
       dispatch({ type: 'FETCH_WEATHER_START', payload: city });
-      
+
       // Fetch both current weather and forecast in parallel
       const [currentWeatherData, forecastData] = await Promise.all([
         fetchWeather(city),
         fetchForecast(city),
       ]);
-      
+
       dispatch({
         type: 'FETCH_WEATHER_SUCCESS',
         payload: {

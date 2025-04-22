@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View, FlatList, Image } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
-import { WeatherData } from '@/services/weatherApi';
+import { WeatherData } from '@/types/weather';
 import { useThemeColor } from '@/hooks/useThemeColor';
 
 interface ForecastListProps {
@@ -16,18 +16,18 @@ export const ForecastList: React.FC<ForecastListProps> = ({ forecastItems }) => 
   // Group forecast by day
   const groupedForecast = React.useMemo(() => {
     const grouped: { [key: string]: WeatherData[] } = {};
-    
+
     forecastItems.forEach(item => {
       const date = new Date(item.date * 1000);
       const day = date.toLocaleDateString('en-US', { weekday: 'long' });
-      
+
       if (!grouped[day]) {
         grouped[day] = [];
       }
-      
+
       grouped[day].push(item);
     });
-    
+
     // Convert to array format for FlatList
     return Object.entries(grouped).map(([day, items]) => ({
       day,
@@ -62,7 +62,7 @@ export const ForecastList: React.FC<ForecastListProps> = ({ forecastItems }) => 
           })}
         </ThemedText>
       </View>
-      
+
       <View style={styles.weatherContainer}>
         <Image
           source={{ uri: getWeatherIconUrl(item.mainItem.icon) }}
@@ -72,7 +72,7 @@ export const ForecastList: React.FC<ForecastListProps> = ({ forecastItems }) => 
           {Math.round(item.mainItem.temperature)}°C
         </ThemedText>
       </View>
-      
+
       <View style={styles.detailsContainer}>
         <ThemedText style={styles.description}>
           {item.mainItem.description.charAt(0).toUpperCase() + item.mainItem.description.slice(1)}
