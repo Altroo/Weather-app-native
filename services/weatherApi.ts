@@ -6,7 +6,7 @@
 import { API_KEY, BASE_URL } from '@env';
 
 // Import types
-import { WeatherData, ForecastData } from '../types/weather';
+import { WeatherData, ForecastData } from '@/types/weather';
 
 /**
  * Fetch current weather data for a city
@@ -38,7 +38,7 @@ export const fetchWeather = async (city: string): Promise<WeatherData> => {
     };
   } catch (error) {
     console.error('Error fetching weather data:', error);
-    throw error;
+    throw new Error(error instanceof Error ? error.message : 'Failed to fetch weather data');
   }
 };
 
@@ -77,6 +77,6 @@ export const fetchForecast = async (city: string): Promise<ForecastData> => {
     };
   } catch (error) {
     console.error('Error fetching forecast data:', error);
-    throw error;
+    throw new Error(error instanceof Error ? error.message : 'Failed to fetch forecast data');
   }
 };
