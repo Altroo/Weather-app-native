@@ -2,9 +2,8 @@
  * Weather API service for fetching weather data from OpenWeatherMap
  */
 
-// OpenWeatherMap API key - in a real app, this would be stored in an environment variable
-const API_KEY = 'YOUR_API_KEY'; // Replace with your actual API key
-const BASE_URL = 'https://api.openweathermap.org/data/2.5';
+// Import environment variables
+import { API_KEY, BASE_URL } from '@env';
 
 // Types for weather data
 export interface WeatherData {
@@ -33,13 +32,13 @@ export const fetchWeather = async (city: string): Promise<WeatherData> => {
     const response = await fetch(
       `${BASE_URL}/weather?q=${city}&units=metric&appid=${API_KEY}`
     );
-    
+
     if (!response.ok) {
       throw new Error('Weather data not found');
     }
-    
+
     const data = await response.json();
-    
+
     return {
       city: data.name,
       country: data.sys.country,
@@ -67,13 +66,13 @@ export const fetchForecast = async (city: string): Promise<ForecastData> => {
     const response = await fetch(
       `${BASE_URL}/forecast?q=${city}&units=metric&appid=${API_KEY}`
     );
-    
+
     if (!response.ok) {
       throw new Error('Forecast data not found');
     }
-    
+
     const data = await response.json();
-    
+
     // Process the forecast data to match our WeatherData interface
     const forecastList = data.list.map((item: any) => ({
       city: data.city.name,
@@ -86,7 +85,7 @@ export const fetchForecast = async (city: string): Promise<ForecastData> => {
       windSpeed: item.wind.speed,
       date: item.dt,
     }));
-    
+
     return {
       list: forecastList,
     };

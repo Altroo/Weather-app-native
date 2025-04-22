@@ -41,7 +41,12 @@ A simple mobile weather application built with React Native and Expo that fetche
 3. Get an API key from OpenWeatherMap:
    - Sign up at [OpenWeatherMap](https://openweathermap.org/api)
    - Generate an API key from your account dashboard
-   - Open `services/weatherApi.ts` and replace `YOUR_API_KEY` with your actual API key
+   - Create a `.env` file in the root directory with the following content:
+     ```
+     API_KEY=your_actual_api_key
+     BASE_URL=https://api.openweathermap.org/data/2.5
+     ```
+   - Replace `your_actual_api_key` with your actual API key
 
 4. Start the app:
 
